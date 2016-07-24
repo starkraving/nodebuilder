@@ -5,7 +5,7 @@ Use this package when first building out the routes for your ExpressJS app. At t
 
 When loaded into your app.js it will do the following:
 
-* On any "missing" route (404) it will display a form allowing you to describe the route and define any of its exits, including the exit method ("get", "post" or "redirect").
+* On any "missing" route (404) it will display a form allowing you to describe the route and define any of its exits, including the exit method ("global", "get", "post" or "redirect").
 * Once submitted it will create a controller file if needed, then create a stubbed route.
 * If the defined exits are of type "global" it will create links in a global nav file that is included in every page.
 * If the defined exits are of type "get" it will create a view file with links to those exits.
