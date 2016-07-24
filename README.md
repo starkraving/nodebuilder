@@ -21,7 +21,7 @@ This package works best when you can automatically load in your changes, so I've
 
 Here's some code samples that illustrate these ideas:
 
-`app.js:`
+app.js:
 
 ```javascript
 // dependencies
@@ -52,6 +52,38 @@ app.use(require('nodebuilder'));
 app.listen(process.env.PORT, function(){
   console.log('Express server listening on port ' + process.env.PORT);
 });
+```
+
+gulpfile.js:
+
+```javascript
+var gulp = require('gulp'),
+    spawn = require('child_process').spawn,
+    node;
+
+gulp.task('server', function() {
+  if (node) node.kill()
+  node = spawn('node', ['app.js'], {stdio: 'inherit'})
+  node.on('close', function (code) {
+    if (code === 8) {
+      gulp.log('Error detected, waiting for changes...');
+    }
+  });
+});
+
+gulp.task('nodebuilder', function() {
+  gulp.run('server')
+
+  gulp.watch(['./app.js', './nodebuilder.js', './controllers/*.js'], function() {
+    gulp.run('server')
+  });
+
+});
+
+process.on('exit', function() {
+    if (node) node.kill()
+});
+
 ```
 
 # About the author
