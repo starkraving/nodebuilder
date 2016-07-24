@@ -54,7 +54,7 @@ app.listen(process.env.PORT, function(){
 });
 ```
 
-gulpfile.js:
+gulpfile.js (adapted from https://gist.github.com/webdesserts/5632955):
 
 ```javascript
 var gulp = require('gulp'),
