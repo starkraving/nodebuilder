@@ -1,0 +1,40 @@
+form(action="", method="post", enctype="application/x-www-form-urlencoded" ng-app="nbApp" ng-controller="init")
+	input(type="hidden", name="nb_method", value=requestMethod)
+	h2 Route data:
+	div#nb_container
+		textarea(id="nb_properties", name="nb_properties", cols="80", rows="20") {"description":"","exits":[{"method":"get","text":"","path":""}]}
+	div(ng-show="ready")
+		p Description:
+		textarea(cols="80", rows="5", ng-model="routeProps.description", style="margin-bottom: 1em;")
+		p Exits:
+		div(ng-repeat="exit in routeProps.exits")
+			label(style="display: inline-block; width: 170px;") Method: &nbsp; 
+				select(ng-model="exit.method")
+					option(value="get") get
+					option(value="post") post
+					option(value="global") global
+					option(value="redirect") redirect
+			
+			label(style="display: inline-block; width: 230px;") Text: &nbsp; 
+					input(type="text", size="20", ng-model="exit.text")
+			
+			label(style="display: inline-block; width: 230px;") Path: &nbsp; 
+					input(type="text", size="20", ng-model="exit.path")
+	input(type="submit", value="Continue", style="margin-top: 1em;")
+script(type="text/javascript", src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js")
+script(type="text/javascript").
+	var nbProps = document.getElementById('nb_properties').innerHTML;
+	document.getElementById('nb_container').innerHTML = '<input type="hidden" name="nb_properties" id="nb_properties" ng-value="stringify(routeProps)">';
+	var nbApp = angular.module('nbApp', []);
+	nbApp.controller('init', function($scope, $element){
+		$scope.routeProps = JSON.parse(nbProps);
+		$scope.stringify = function(){
+			return JSON.stringify($scope.routeProps);
+		};
+		$scope.$watch('routeProps', function(newValue, oldValue, scope){
+			if ( $scope.routeProps.exits[$scope.routeProps.exits.length-1].path.length > 0 ) {
+				$scope.routeProps.exits.push({method:"get",text:"",path:""});
+			}
+		}, true);
+		$scope.ready = true;
+	});

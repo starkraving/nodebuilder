@@ -3,13 +3,7 @@ var fs = require('fs');
 module.exports = function(req, resp, next) {
 	// display the properties form to define the route
 	if ( 'POST' !== req.method || !req.body.nb_properties ) {
-		resp.contentType('text/html');
-		resp.end('<form action="" method="post" enctype="application/x-www-form-urlencoded">'
-			+'<input type="hidden" name="nb_method" value="'+req.method.toLowerCase()+'">'
-			+'<label for="nb_properties">Route data:<br></label>'
-			+'<textarea name="nb_properties" cols="80" rows="20">'
-			+'{\n"description":"",\n"exits":[\n{"method":"get","text":"","path":""}\n]}</textarea><br>'
-			+'<input type="submit" value="Continue"></form>');
+		resp.render(__dirname+'/view/nbform',{requestMethod: req.method.toLowerCase()});
 	} else {
 		// collect the route properties
 		var vText;
@@ -39,10 +33,11 @@ module.exports = function(req, resp, next) {
 				var menuText = '';
 				for ( var x in rProperties.exits ) {
 					var exit = rProperties.exits[x];
+					if ( exit.path == '' ) { continue; }
 					switch ( exit.method ) {
 						case 'post' :
-							formText += '\n\t\tform(action="'+exit.path+'", method="post")'
-										+ '\n\t\t\tbutton(type="submit") '+exit.text;
+							formText += '\n\tform(action="'+exit.path+'", method="post")'
+										+ '\n\t\tbutton(type="submit") '+exit.text;
 							break;
 						case 'global' :
 							menuText += '\n\t\t\tli\n\t\t\t\ta(href="'+exit.path+'") '+exit.text;
