@@ -63,7 +63,7 @@ $ nodemon app.js
 ## Thanks for using nodebuilder!
 This project was created to help you save development time and money. Did it?
 
-[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](mike@fusebuilder.net)
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=2QCF74WFXGWQS&source=url)
 
 # About the author
 Mike Ritchie has been developing web applications for over a decade, and is largely known for the "FuseBuilder" app, which allowed PHP and ColdFusion developers to rapidly describe their own web applications using the "Fusebox" framework and methodology. FuseBuilder was quite a bit more advanced in that it not only created a wireframe of the developer's app, it allowed the developer to actually create working forms and layouts in the view, along with model files with working SQL and controllers with actual business logic. Nodebuilder is an offshoot of this concept applied to the Node/Express paradym. It's hoped that one day Nodebuilder will have much of the same power.
