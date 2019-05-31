@@ -67,11 +67,11 @@ module.exports = function(req, resp, next) {
 							'header\n\tmenu\n\t\th4 Global Exits\n\t\tul',
 							{mode: fMode});
 					}
-					fs.writeFile('./views/'+vFile+'.pug', vText, {mode: fMode});
+					fs.writeFileSync('./views/'+vFile+'.pug', vText, {mode: fMode});
 					if ( menuText.length > 0 ) {
 						var headerText = fs.readFileSync('./views/header.pug').toString();
 						headerText += menuText;
-						fs.writeFile('./views/header.pug', headerText, {mode: fMode});
+						fs.writeFileSync('./views/header.pug', headerText, {mode: fMode});
 					}
 				});
 			}
