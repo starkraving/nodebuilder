@@ -1,6 +1,6 @@
 {
   "name": "nodebuilder",
-  "version": "0.9.3",
+  "version": "0.9.4",
   "description": "Node Express Project Planner",
   "main": "index.js",
   "dependencies": {
